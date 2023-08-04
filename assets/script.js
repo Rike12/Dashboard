@@ -19,3 +19,32 @@ var myChart = new Chart(ctx, {
         }]
     },
 });
+// Search Project
+const project = document.querySelectorAll('.project')
+
+const displayProject = (values) =>{
+    project.forEach(element =>{
+        element.style.display = "none"
+        const title = element.querySelector('h2').innerHTML.toUpperCase();
+        const status = element.dataset.status.toUpperCase();
+        const recent = element.querySelector('p').innerHTML.toUpperCase();
+
+        if (title.includes(values)){
+            element.style.display = "block"
+        }
+        else if(values != 'RECENT' && status.includes(values)){
+            element.style.display = "block"
+        }
+        else if(values === 'RECENT' && recent.includes('HOUR') || recent.includes('RECENT')){
+            element.style.display = "block"
+        }
+    })
+}
+
+searchProject.addEventListener('input', (e) =>{
+    displayProject(e.target.value.toUpperCase())
+})
+
+projectFilter.addEventListener('input', (e) =>{
+    displayProject(e.target.value.toUpperCase())
+})
